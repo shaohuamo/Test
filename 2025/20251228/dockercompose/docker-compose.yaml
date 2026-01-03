@@ -1,0 +1,28 @@
+services:
+ mysql-container: #container name
+  image: mysql:8.3.0
+  environment: #环境变量
+   MYSQL_ROOT_PASSWORD: admin
+  ports:
+   - "3306:3306" #host port:container port
+  volumes:
+   - ./mysql-init:/docker-entrypoint-initdb.d
+  networks: #可以写多个network name
+   - products-microservice-network #docker compose会先创建这里所需的network
+  hostname: mysql-host-productsmicroservice #container的host name
+
+ products-microservice:
+  image: harshamicroservices/ecommerce-products-microservice:v1.0
+  environment:
+   MYSQL_HOST: mysql-host-productsmicroservice
+   MYSQL_PASSWORD: admin
+  ports:
+   - "8080:8080"
+  networks:
+   - products-microservice-network
+
+#在使用docker compose up命令时，docker compose会自动创建一个默认的network来包含所有containers
+#也可以手动配置network；如下所示：定义一个custom network
+networks:
+ products-microservice-network:
+  driver: bridge

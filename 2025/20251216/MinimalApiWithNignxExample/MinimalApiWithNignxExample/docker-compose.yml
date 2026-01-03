@@ -1,0 +1,21 @@
+services:
+  api1:
+    build: .  # 从当前目录的Dockerfile构建image
+    environment:# 设置环境变量
+        - APP_NAME=App1 # 环境变量：APP_NAME=App1
+    ports:# 端口映射
+        - "7001:8080" # 主机端口:容器端口
+
+  api2:
+    build: .
+    environment:
+        - APP_NAME=App2
+    ports:
+        - "7002:8080"
+
+  api3:
+    build: .
+    environment:
+        - APP_NAME=App3
+    ports:
+        - "7003:8080"
