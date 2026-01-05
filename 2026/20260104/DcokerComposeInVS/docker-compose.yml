@@ -1,0 +1,6 @@
+services:
+  dcokercomposeinvs:
+    image: dcokercomposeinvs
+    build:
+      context: .
+      dockerfile: DcokerComposeInVS/Dockerfile

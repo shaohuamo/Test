@@ -1,0 +1,6 @@
+@DcokerComposeInVS_HostAddress = http://localhost:5074
+
+GET {{DcokerComposeInVS_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
