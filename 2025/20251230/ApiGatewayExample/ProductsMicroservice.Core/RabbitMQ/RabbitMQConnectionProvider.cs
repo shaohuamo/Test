@@ -37,7 +37,8 @@ public class RabbitMQConnectionProvider: IRabbitMQConnectionProvider
             if (_connection is { IsOpen: true })
                 return _connection;
 
-            _connection = await _connectionFactory.CreateConnectionAsync();
+            var temp = await _connectionFactory.CreateConnectionAsync();
+            Volatile.Write(ref _connection, temp);
             return _connection;
         }
         finally
